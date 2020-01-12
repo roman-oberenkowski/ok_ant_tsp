@@ -66,8 +66,10 @@ namespace TSP_Mrowkowy
             return mapaDrogi;
         }
 
-        public Bitmap DrawBest(Cord[] cords)
+        public Bitmap DrawBest(List<int> way = null)
         {
+            if (way == null)
+                way = bestWay;
             Pen pheroPen = new Pen(Color.Black, 1);
 
             Bitmap mapaDrogi = new Bitmap(mapaPunkty);
@@ -76,10 +78,10 @@ namespace TSP_Mrowkowy
             {
                 for (int i = 1; i <= Program.ile_miast; i++)
                 {
-                    float x1 = cords[bestWay[i]].x * scale;
-                    float y1 = cords[bestWay[i]].y * scale;
-                    float x2 = cords[bestWay[i-1]].x * scale;
-                    float y2 = cords[bestWay[i-1]].y * scale;
+                    float x1 = Program.cords[way[i]].x * scale;
+                    float y1 = Program.cords[way[i]].y * scale;
+                    float x2 = Program.cords[way[i-1]].x * scale;
+                    float y2 = Program.cords[way[i-1]].y * scale;
 
                     graphics.DrawLine(pheroPen, x1, y1, x2, y2);
                 }
