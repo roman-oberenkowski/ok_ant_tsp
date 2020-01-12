@@ -30,12 +30,12 @@ namespace TSP_Mrowkowy
 
         public void ShowPhero()
         {
-            pictureBox1.Image = wyswietlacz.DrawRoads(Program.edges);
+            pictureBox1.Image = wyswietlacz.DrawRoads();
             ShowDialog();
         }
         public void ShowBest()
         {
-            pictureBox1.Image = wyswietlacz.DrawBest(Program.cords);
+            pictureBox1.Image = wyswietlacz.DrawBest();
             ShowDialog();
         }
     }
