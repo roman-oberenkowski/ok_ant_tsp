@@ -39,15 +39,15 @@ namespace TSP_Mrowkowy
             }
         }
 
-        public Bitmap DrawRoads(Edge[,] edges)
+        public Bitmap DrawRoads()
         {
             Pen pheroPen = new Pen(Color.Black, 1);
             double maxPhero = 0;
 
             for (int i = 0; i < Program.ile_miast; i++)
                 for (int j = i + 1; j < Program.ile_miast; j++)
-                    if (maxPhero < edges[i, j].pheromone)
-                        maxPhero = edges[i, j].pheromone;
+                    if (maxPhero < Program.edges[i, j].pheromone)
+                        maxPhero = Program.edges[i, j].pheromone;
 
             Bitmap mapaDrogi = new Bitmap(mapaPunkty);
 
@@ -56,10 +56,10 @@ namespace TSP_Mrowkowy
                     using (var graphics = Graphics.FromImage(mapaDrogi))
                     {
                         pheroPen.Color = Color.FromArgb(Convert.ToInt32(edges[i, j].pheromone / maxPhero * 255), Color.Black);
-                        float x1 = edges[i, j].A.x * scale;
-                        float y1 = edges[i, j].A.y * scale;
-                        float x2 = edges[i, j].B.x * scale;
-                        float y2 = edges[i, j].B.y * scale;
+                        float x1 = Program.edges[i, j].A.x * scale;
+                        float y1 = Program.edges[i, j].A.y * scale;
+                        float x2 = Program.edges[i, j].B.x * scale;
+                        float y2 = Program.edges[i, j].B.y * scale;
                         graphics.DrawLine(pheroPen, x1, y1, x2, y2);
                     }
 
