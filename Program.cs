@@ -62,7 +62,8 @@ namespace TSP_Mrowkowy
             }
             Form1.wyswietlacz.bestWay = ants[IDofMinimal].visitOrder;
 
-            Console.WriteLine($" wyniczek: {minimal}");
+            Console.Write($"wyniczek: {minimal}");
+            ants[IDofMinimal].checkIfCorrect();
 
             for (int antId = 0; antId < ile_mrowek; antId++)
             {

@@ -95,8 +95,8 @@ namespace TSP_Mrowkowy
                 }
             else
             {
-                int default_iterations = 1;
-                Console.WriteLine($"ERR, wybieram domyślne {default_iterations} iteracji");
+                int default_iterations = 5;
+                Console.WriteLine($"wybieram domyślne {default_iterations} iteracji");
                 for (int i = 0; i < default_iterations; i++)
                     Program.TripRom();
             }

@@ -120,5 +120,25 @@ namespace TSP_Mrowkowy
             }
             return probabilities;
         }
+        public void checkIfCorrect()
+        {
+            bool error = false;
+            double droga = 0;
+            if (visitOrder.First() != visitOrder.Last())
+            {
+                error = true;
+            }
+            for (int i = 0; i < visitOrder.Count()-1; i++)
+            {
+                droga+= edges[visitOrder[i], visitOrder[i+1]].length;
+                if (!visited[i]) error = true;
+            } 
+            if(travelledDistance<0.99*droga || travelledDistance > 1.01 * droga)
+            {
+                error = true;
+            }
+            if (error) Console.WriteLine("D***-zły wynik");
+            else { Console.WriteLine(" OK"); }
+        }
     }
 }

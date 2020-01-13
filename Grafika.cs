@@ -55,7 +55,7 @@ namespace TSP_Mrowkowy
                 for (int j = i + 1; j < Program.ile_miast; j++)
                     using (var graphics = Graphics.FromImage(mapaDrogi))
                     {
-                        pheroPen.Color = Color.FromArgb(Convert.ToInt32(edges[i, j].pheromone / maxPhero * 255), Color.Black);
+                        pheroPen.Color = Color.FromArgb(Convert.ToInt32(Program.edges[i, j].pheromone / maxPhero * 255), Color.Black);
                         float x1 = Program.edges[i, j].A.x * scale;
                         float y1 = Program.edges[i, j].A.y * scale;
                         float x2 = Program.edges[i, j].B.x * scale;
