@@ -9,7 +9,7 @@ namespace TSP_Mrowkowy
 {
     public class Grafika
     {
-        public static int rozmiar = 1005;
+        public static int rozmiar = 1100;
         public Bitmap mapaPunkty = new Bitmap(rozmiar,rozmiar);
         float maxXY = 0;
         static float scale;
@@ -33,8 +33,8 @@ namespace TSP_Mrowkowy
         {
             foreach (Cord pkt in cords)
             {
-                for (int i = -1; i <= 1; i++)
-                    for (int j = -1; j <= 1; j++)
+                for (int i = -2; i <= 2; i++)
+                    for (int j = -2; j <= 2; j++)
                         mapaPunkty.SetPixel(Convert.ToInt32(pkt.x * scale) + i, Convert.ToInt32(pkt.y * scale) + j, Color.Red);
             }
         }
@@ -68,20 +68,21 @@ namespace TSP_Mrowkowy
 
         public Bitmap DrawBest(List<int> way = null)
         {
+            float ile_procent_przesuniecia = 0.003f;
             if (way == null)
                 way = bestWay;
-            Pen pheroPen = new Pen(Color.Black, 1);
+            Pen pheroPen = new Pen(Color.Green, 1);
 
-            Bitmap mapaDrogi = new Bitmap(mapaPunkty);
+            Bitmap mapaDrogi = new Bitmap(DrawRoads());
 
             using (var graphics = Graphics.FromImage(mapaDrogi))
             {
                 for (int i = 1; i <= Program.ile_miast; i++)
                 {
-                    float x1 = Program.cords[way[i]].x * scale;
-                    float y1 = Program.cords[way[i]].y * scale;
-                    float x2 = Program.cords[way[i-1]].x * scale;
-                    float y2 = Program.cords[way[i-1]].y * scale;
+                    float x1 = Program.cords[way[i]].x * scale + rozmiar * ile_procent_przesuniecia;
+                    float y1 = Program.cords[way[i]].y * scale + rozmiar * ile_procent_przesuniecia;
+                    float x2 = Program.cords[way[i-1]].x * scale + rozmiar * ile_procent_przesuniecia;
+                    float y2 = Program.cords[way[i-1]].y * scale + rozmiar * ile_procent_przesuniecia;
 
                     graphics.DrawLine(pheroPen, x1, y1, x2, y2);
                 }

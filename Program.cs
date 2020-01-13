@@ -31,7 +31,7 @@ namespace TSP_Mrowkowy
             return kordy;
         }
 
-        public static void TripRom()
+        public static double TripRom()
         {
             //towrzymy zadaną ilość mrówek i przypisujemy im miasto startowe (losowo)
             Ant[] ants = new Ant[ile_mrowek];
@@ -62,7 +62,7 @@ namespace TSP_Mrowkowy
             }
             Form1.wyswietlacz.bestWay = ants[IDofMinimal].visitOrder;
 
-            Console.Write($"wyniczek: {minimal}");
+            //Console.Write($"wyniczek: {minimal}");
             ants[IDofMinimal].checkIfCorrect();
 
             for (int antId = 0; antId < ile_mrowek; antId++)
@@ -77,6 +77,7 @@ namespace TSP_Mrowkowy
                 for (int j = 0; j < ile_miast; j++)
                     if (i != j)
                         edges[i, j].GainPheromone(); // feromon jest kalkulowany po tym, gdy przejdą wszystkie mrówki
+            return minimal;
         }
         static void wypiszPunkty()
         {
@@ -233,7 +234,7 @@ namespace TSP_Mrowkowy
             //    edges[i, j] = new Edge(Cord.Zero(), Cord.Zero());
             //wypiszPunkty();
             //wypiszDist();
-            //Menu.Start();
+            Menu.Start();
         }
     }
 }

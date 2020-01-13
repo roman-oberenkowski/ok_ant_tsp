@@ -46,6 +46,9 @@ namespace TSP_Mrowkowy
                 case 'a':
                     Program.okno.ShowBest();
                     goto MainMenu;
+
+                default:
+                    goto MainMenu;
             }
         MenuO:
             Console.WriteLine("N to set number of ants, P to set pheromone (works as restart), any other key to return");
@@ -82,12 +85,15 @@ namespace TSP_Mrowkowy
                         if (i == k)
                         {
                             Console.Write($"{i} ");
+                            Console.WriteLine(Program.TripRom());
+
                             break;
                         }
                         if (i % k == 0 && k*10 >= N)
                         {
 
                             Console.Write($"{i} ");
+                            Console.WriteLine(Program.TripRom());
                             break;
                         }
                     }
