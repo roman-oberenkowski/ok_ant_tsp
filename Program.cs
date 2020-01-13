@@ -11,9 +11,9 @@ namespace TSP_Mrowkowy
         public static int ile_mrowek = 10;
         public static double ilośćFero = 1;
         public static int ile_miast;
-        public static Cord[] cords = input(ref ile_miast);
-        public static Edge[,] edges = new Edge[ile_miast, ile_miast];
-        public static Form1 okno = new Form1();
+        public static Cord[] cords;
+        public static Edge[,] edges;
+        public static Form1 okno;
         static Cord[] input(ref int ile_miast)
         {
             string[] lines = System.IO.File.ReadAllLines("input52.txt");
@@ -220,6 +220,9 @@ namespace TSP_Mrowkowy
     
         static void Main(string[] args)
         {
+            TSP_Mrowkowy.Program.cords= input(ref ile_miast);
+            edges = new Edge[ile_miast, ile_miast];
+            TSP_Mrowkowy.Edge.ro = 0.1;
             TSP_Mrowkowy.Ant.rnd = new Random();
             TSP_Mrowkowy.Ant.edges = edges;
             TSP_Mrowkowy.Ant.cords = cords;
@@ -228,6 +231,7 @@ namespace TSP_Mrowkowy
                 for (int j = 0; j < ile_miast; j++)
                     if (i != j)
                         edges[i, j] = new Edge(cords[i], cords[j]);
+            okno = new Form1();
             load_opt();
             run_greedy();
             //else

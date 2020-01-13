@@ -8,6 +8,7 @@ namespace TSP_Mrowkowy
 {
     public class Edge
     {
+        public static double ro;
         public double pheromone;
         public double length;
         public double pheromoneToGain;
@@ -23,11 +24,12 @@ namespace TSP_Mrowkowy
             float yy = a.y - b.y;
             length = Math.Sqrt(xx * xx + yy * yy);
             //inicjacja domyslnych poziomow feromonu
-            pheromone = 100; //PARAMETR
+            pheromone = 10; //PARAMETR
             visibility = 1.0 / length;         }
         public void GainPheromone()
         {
-            this.pheromone /= length;
+            //this.pheromone /= length;
+            this.pheromone *= 1 - ro;
             this.pheromone += pheromoneToGain;
             this.pheromoneToGain = 0;
         }
