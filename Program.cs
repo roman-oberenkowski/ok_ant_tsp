@@ -11,6 +11,8 @@ namespace TSP_Mrowkowy
         public static int ile_mrowek = 10;
         public static double ilośćFero = 1;
         public static int ile_miast;
+        public static Cord[] cords = input(ref ile_miast);
+        public static Edge[,] edges = new Edge[ile_miast, ile_miast];
         static Cord[] input(ref int ile_miast)
         {
             string[] lines = System.IO.File.ReadAllLines("input52.txt");
@@ -27,20 +29,17 @@ namespace TSP_Mrowkowy
             }
             return kordy;
         }
-        
-        public static Cord[] cords = input(ref ile_miast);
-        public static Edge[,] edges = new Edge[ile_miast, ile_miast];
+ 
         public static void TripRom()
         {
-            //ile_miast,ile_mrowek,edges[x,y],
-            //towrzymy zadaną ilość mrówek i przypisujemy in miasto startowe (losowo)
+            //towrzymy zadaną ilość mrówek i przypisujemy im miasto startowe (losowo)
             Ant[] ants=new Ant[ile_mrowek];
             for (int i = 0; i < ile_mrowek; i++)
             {
                 //ants[i]= new Ant(ile_miast,ref cords,ref edges);
                 ants[i] = new Ant();
             }
-            //robimy tyle ruchów ile jest miast 
+            //robimy tyle ruchów ile jest miast (ostatni ruch to powrót do miasta startowego
             for(int ruch = 0; ruch < ile_miast; ruch++)
             {
                 //każdą mrówkę przesuwamy o 1 miasto
@@ -72,7 +71,7 @@ namespace TSP_Mrowkowy
                 //Console.WriteLine("[{0}]", string.Join(", ", ants[antId].visitOrder));
             }
 
-            //FINIGING Touches ------ŹLE nie w tym miejscu
+            //FINIGING Touches ------ŹLE??? nie w tym miejscu
             for (int i = 0; i < ile_miast; i++)
                 for (int j = 0; j < ile_miast; j++)
                     if (i != j)
@@ -112,6 +111,46 @@ namespace TSP_Mrowkowy
             }
             Console.WriteLine("------------------------");
         }
+        static List<int> load_opt()
+        {
+            string[] lines = System.IO.File.ReadAllLines("berlin52.opt.tour");
+            List<int> lista = new List<int>();
+            lista.Clear();
+            int nr=0;
+            int start = 0;
+            bool error = false;
+            //10 prób na wczytanie pierwszej wart z pliku - błędy na liniach z tekstem
+            for (int i = 0; i < 10; i++)
+            {
+                if (Int32.TryParse(lines[i], out start))
+                {
+                    start = i;
+                    error = false;
+                    break;
+                }
+                error = true;
+            }
+            if (error) throw new System.ArgumentException("OptFileLoadFailed");
+            //-1, bo wczytuje wcześniej jedną
+            for (int i = start; i < ile_miast+start; i++)
+            {
+                nr = Int32.Parse(lines[i])-1;
+                lista.Add(nr);
+            }
+            ;
+            nr = Int32.Parse(lines[ile_miast+start]);
+            if (nr == -1) //not 0, becouse i don't subrtract while reading last
+            {
+                lista.Add(lista.First());
+                Console.WriteLine("[" +string.Join(", ", lista)+"]");
+                return lista;
+            }
+            else
+            {
+                throw new System.ArgumentException("OptFileLoadFailed");
+            }
+           
+        }
         static void test_rng()
         {
             int[] tab = { 0, 0, 0, 0 };
@@ -145,6 +184,7 @@ namespace TSP_Mrowkowy
             TSP_Mrowkowy.Ant.edges = edges;
             TSP_Mrowkowy.Ant.cords = cords;
             TSP_Mrowkowy.Ant.cities = ile_miast;
+            load_opt();
             for (int i = 0; i < ile_miast; i++)
                 for (int j = 0; j < ile_miast; j++)
                     if (i != j)

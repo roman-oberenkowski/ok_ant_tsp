@@ -105,5 +105,4 @@ namespace TSP_Mrowkowy
             goto MainMenu;
         }
     }
-    
 }
