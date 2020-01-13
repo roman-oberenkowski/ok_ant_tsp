@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TSP_Mrowkowy
-{ 
+{
     public class Program
-    { 
+    {
         public static int ile_mrowek = 10;
         public static double ilośćFero = 1;
         public static int ile_miast;
         public static Cord[] cords = input(ref ile_miast);
         public static Edge[,] edges = new Edge[ile_miast, ile_miast];
+        public static Form1 okno = new Form1();
         static Cord[] input(ref int ile_miast)
         {
             string[] lines = System.IO.File.ReadAllLines("input52.txt");
@@ -20,30 +21,30 @@ namespace TSP_Mrowkowy
             Cord[] kordy = new Cord[ile_miast];
             for (int i = 0; i < ile_miast; i++)
             {
-                string[] XY = {"", ""};
+                string[] XY = { "", "" };
                 XY = lines[i + 1].Split(' ', '\t');
                 float x, y;
                 x = float.Parse(XY[0]);
                 y = float.Parse(XY[1]);
-                kordy[i] = new Cord(x,y);
+                kordy[i] = new Cord(x, y);
             }
             return kordy;
         }
- 
+
         public static void TripRom()
         {
             //towrzymy zadaną ilość mrówek i przypisujemy im miasto startowe (losowo)
-            Ant[] ants=new Ant[ile_mrowek];
+            Ant[] ants = new Ant[ile_mrowek];
             for (int i = 0; i < ile_mrowek; i++)
             {
                 //ants[i]= new Ant(ile_miast,ref cords,ref edges);
                 ants[i] = new Ant();
             }
             //robimy tyle ruchów ile jest miast (ostatni ruch to powrót do miasta startowego
-            for(int ruch = 0; ruch < ile_miast; ruch++)
+            for (int ruch = 0; ruch < ile_miast; ruch++)
             {
                 //każdą mrówkę przesuwamy o 1 miasto
-                for(int antId = 0; antId < ile_mrowek; antId++)
+                for (int antId = 0; antId < ile_mrowek; antId++)
                 {
                     ants[antId].goNextAuto();
                 }
@@ -51,7 +52,7 @@ namespace TSP_Mrowkowy
             //znajdź najlepszą mrówkę (porównując travelled distance)
             double minimal = ants[0].travelledDistance;
             int IDofMinimal = 0;
-            for(int antId = 1; antId < ile_mrowek; antId++)
+            for (int antId = 1; antId < ile_mrowek; antId++)
             {
                 if (ants[antId].travelledDistance < minimal)
                 {
@@ -97,7 +98,6 @@ namespace TSP_Mrowkowy
             }
             Console.WriteLine("------------------------");
         }
-        
         static void wypiszDist()
         {
             for (int i = 0; i < ile_miast; i++)
@@ -116,7 +116,7 @@ namespace TSP_Mrowkowy
             string[] lines = System.IO.File.ReadAllLines("berlin52.opt.tour");
             List<int> lista = new List<int>();
             lista.Clear();
-            int nr=0;
+            int nr = 0;
             int start = 0;
             bool error = false;
             //10 prób na wczytanie pierwszej wart z pliku - błędy na liniach z tekstem
@@ -132,24 +132,24 @@ namespace TSP_Mrowkowy
             }
             if (error) throw new System.ArgumentException("OptFileLoadFailed");
             //-1, bo wczytuje wcześniej jedną
-            for (int i = start; i < ile_miast+start; i++)
+            for (int i = start; i < ile_miast + start; i++)
             {
-                nr = Int32.Parse(lines[i])-1;
+                nr = Int32.Parse(lines[i]) - 1;
                 lista.Add(nr);
             }
             ;
-            nr = Int32.Parse(lines[ile_miast+start]);
+            nr = Int32.Parse(lines[ile_miast + start]);
             if (nr == -1) //not 0, becouse i don't subrtract while reading last
             {
                 lista.Add(lista.First());
-                Console.WriteLine("[" +string.Join(", ", lista)+"]");
+                Console.WriteLine("[" + string.Join(", ", lista) + "]");
                 return lista;
             }
             else
             {
                 throw new System.ArgumentException("OptFileLoadFailed");
             }
-           
+
         }
         static void test_rng()
         {
@@ -175,25 +175,65 @@ namespace TSP_Mrowkowy
             }
             Console.WriteLine($"{tab[0]}, {tab[1]}, {tab[2]}, {tab[3]}");
         }
-
-        public static Form1 okno = new Form1();
-
+        static void run_greedy()
+        {
+            double greedy_travelled_distance = 0;
+            var greedy_visited = new List<bool>();
+            var greedy_visit_order = new List<int>();
+            for (int i = 0; i < ile_miast; i++)
+            {
+                greedy_visited.Add(false);
+            }
+            int current = 0;
+            greedy_visited[0] = true;
+            greedy_visit_order.Add(0);
+            for (int i = 0; i < ile_miast-1; i++)
+            {
+                //find closest
+                int closest_id = -1;
+                for (int candidate = 0; candidate < ile_miast; candidate++)
+                {
+                    if (greedy_visited[candidate]) continue;
+                    //only if NOT visited - cannot go to self, becouse self is already visited
+                    if (closest_id == -1) closest_id = candidate;
+                    else
+                    {
+                        if (edges[current, candidate].length < edges[current, closest_id].length)
+                        {
+                            closest_id = candidate;
+                        }
+                    }
+                }
+                //Console.WriteLine($"x: {current} y: {closest_id}");
+                greedy_travelled_distance += edges[current, closest_id].length;
+                current = closest_id;
+                greedy_visited[current] = true;
+                greedy_visit_order.Add(current);
+            }
+            //go back to home city
+            greedy_travelled_distance += edges[current, greedy_visit_order.First()].length;
+            greedy_visit_order.Add(greedy_visit_order.First());
+            Console.WriteLine(string.Join(" ", greedy_visit_order));
+            Console.WriteLine(greedy_travelled_distance);
+        }
+    
         static void Main(string[] args)
         {
             TSP_Mrowkowy.Ant.rnd = new Random();
             TSP_Mrowkowy.Ant.edges = edges;
             TSP_Mrowkowy.Ant.cords = cords;
             TSP_Mrowkowy.Ant.cities = ile_miast;
-            load_opt();
             for (int i = 0; i < ile_miast; i++)
                 for (int j = 0; j < ile_miast; j++)
                     if (i != j)
                         edges[i, j] = new Edge(cords[i], cords[j]);
-                    //else
-                    //    edges[i, j] = new Edge(Cord.Zero(), Cord.Zero());
+            load_opt();
+            run_greedy();
+            //else
+            //    edges[i, j] = new Edge(Cord.Zero(), Cord.Zero());
             //wypiszPunkty();
             //wypiszDist();
-            Menu.Start();
+            //Menu.Start();
         }
     }
 }
