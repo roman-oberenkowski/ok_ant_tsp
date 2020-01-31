@@ -14,6 +14,7 @@ namespace TSP_Mrowkowy
         public static Cord[] cords;
         public static Edge[,] edges;
         public static Form1 okno;
+        public static Ant GOAT;
         static Cord[] input(ref int ile_miast)
         {
             string[] lines = System.IO.File.ReadAllLines("input52.txt");
@@ -52,15 +53,20 @@ namespace TSP_Mrowkowy
             //znajdź najlepszą mrówkę (porównując travelled distance)
             double minimal = ants[0].travelledDistance;
             int IDofMinimal = 0;
+            if (GOAT == null || GOAT.travelledDistance > ants[0].travelledDistance)
+                GOAT = ants[0];
             for (int antId = 1; antId < ile_mrowek; antId++)
             {
                 if (ants[antId].travelledDistance < minimal)
                 {
                     minimal = ants[antId].travelledDistance;
                     IDofMinimal = antId;
+                    if (GOAT.travelledDistance > ants[antId].travelledDistance)
+                        GOAT = ants[antId];
                 }
             }
             Form1.wyswietlacz.bestWay = ants[IDofMinimal].visitOrder;
+            
 
             //Console.Write($"wyniczek: {minimal}");
             ants[IDofMinimal].checkIfCorrect();

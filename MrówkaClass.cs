@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TSP_Mrowkowy
 {
-    class Ant
+    public class Ant
     {
         //constanst
         static double factor_phero = 1; //anfa

@@ -33,9 +33,9 @@ namespace TSP_Mrowkowy
             pictureBox1.Image = wyswietlacz.DrawRoads();
             ShowDialog();
         }
-        public void ShowBest()
+        public void ShowBest(List<int> way = null)
         {
-            pictureBox1.Image = wyswietlacz.DrawBest();
+            pictureBox1.Image = wyswietlacz.DrawBest(way);
             ShowDialog();
         }
     }

@@ -11,7 +11,8 @@ namespace TSP_Mrowkowy
         public static void Start()
         {
         MainMenu:
-            Console.WriteLine("O for options, R to run, D to draw, Q to quit");
+            Console.WriteLine("\nO for options, R to run, D to draw, Q to quit");
+            Console.Write(">>");
             switch (System.Console.ReadKey(true).KeyChar)
             {
                 case 'O':
@@ -34,7 +35,8 @@ namespace TSP_Mrowkowy
                     goto MainMenu;
             }
         MenuD:
-            Console.WriteLine("P for pheromone traces, A for the best ant");
+            Console.WriteLine("Draw\n\tP for pheromone traces, \n\tA for the best ant of last iteration, \n\tB for the best ant ever, \n\tany other key to return");
+            Console.Write("\t>>");
             switch (System.Console.ReadKey(true).KeyChar)
             {
                 case 'P':
@@ -44,14 +46,20 @@ namespace TSP_Mrowkowy
 
                 case 'A':
                 case 'a':
-                    Program.okno.ShowBest();
+                    Program.okno.ShowBest(); //program się wysypie jeśli nie było w ogóle mrówek
+                    goto MainMenu;
+
+                case 'B':
+                case 'b':
+                    Program.okno.ShowBest(Program.GOAT.visitOrder); //program się wysypie jeśli nie było w ogóle mrówek
                     goto MainMenu;
 
                 default:
                     goto MainMenu;
             }
         MenuO:
-            Console.WriteLine("N to set number of ants, P to set pheromone (works as restart), any other key to return");
+            Console.WriteLine("Options\n\tN to set number of ants, \n\tP to set pheromone (works as restart), \n\tany other key to return");
+            Console.Write("\t>>");
             switch (System.Console.ReadKey(true).KeyChar)
             {
                 case 'N':
@@ -76,20 +84,21 @@ namespace TSP_Mrowkowy
                     goto MainMenu;
             }
         MenuR:
-            Console.WriteLine("enter a number of iterations");
+            Console.WriteLine("Run\n\tenter a number of iterations");
+            Console.Write("\t>>");
             if (Int32.TryParse(Console.ReadLine(), out int N))
                 for (int i = 1; i <= N; i++)
                 {
                     for (int k = 1; k <= N; k *= 10)
                     {
-                        if (i == k)
+                        if (i == k) //wypisz wynik 1, 10, 100 .. 10^x iteracji
                         {
                             Console.Write($"{i} ");
                             Console.WriteLine(Program.TripRom());
 
                             break;
                         }
-                        if (i % k == 0 && k*10 >= N)
+                        if (i % k == 0 && k*10 >= N) //wypisz wynik co każdą zmianę najbardziej znaczącej cyfry
                         {
 
                             Console.Write($"{i} ");
@@ -97,7 +106,7 @@ namespace TSP_Mrowkowy
                             break;
                         }
                     }
-                    Program.TripRom();
+                    Program.TripRom(); //iteracja bez wypisania
                 }
             else
             {
