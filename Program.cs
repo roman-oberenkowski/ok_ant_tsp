@@ -11,7 +11,7 @@ namespace TSP_Mrowkowy
         public static int ile_mrowek = 10;
         public static double ilośćFero = 10;
         public static double default_fero = 10;
-        public static int reset_every = 200;
+        public static int reset_every = 50;
         public static int ile_miast;
         public static Cord[] cords;
         public static Edge[,] edges;
@@ -295,6 +295,9 @@ namespace TSP_Mrowkowy
                         edges[i, j] = new Edge(cords[i], cords[j]);
             okno = new Form1();
             if (filename == "berlin52" || filename== "kroC100" || filename== "pr76") load_opt();
+            if (filename == "tsp1000") Console.WriteLine("Best from mmachowiak: 24724");
+            if (filename == "tsp500") Console.WriteLine("Best from mmachowiak: 84585");
+            if (filename == "tsp250") Console.WriteLine("Best from mmachowiak: 12642");
             run_greedy();
             //else
             //    edges[i, j] = new Edge(Cord.Zero(), Cord.Zero());
