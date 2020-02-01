@@ -24,8 +24,9 @@ namespace TSP_Mrowkowy
             float yy = a.y - b.y;
             length = Math.Sqrt(xx * xx + yy * yy);
             //inicjacja domyslnych poziomow feromonu
-            pheromone = 10; //PARAMETR
-            visibility = 1.0 / length;         }
+            pheromone = Program.default_fero; //param in main
+            visibility = 1.0 / length;         
+        }
         public void GainPheromone()
         {
             //this.pheromone /= length;

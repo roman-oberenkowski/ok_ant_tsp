@@ -9,13 +9,15 @@ namespace TSP_Mrowkowy
     public class Program
     {
         public static int ile_mrowek = 10;
-        public static double ilośćFero = 1;
+        public static double ilośćFero = 10;
+        public static double default_fero = 10;
         public static int ile_miast;
         public static Cord[] cords;
         public static Edge[,] edges;
         public static Form1 okno;
         public static Ant GOAT;
         public static string filename = "berlin52";
+        public static bool restart = false;
         static Cord[] input(ref int ile_miast)
         {
             
@@ -74,6 +76,11 @@ namespace TSP_Mrowkowy
             //znajdź najlepszą mrówkę (porównując travelled distance)
             double minimal = ants[0].travelledDistance;
             int IDofMinimal = 0;
+            if (restart)
+            {
+                GOAT = null;
+                restart = false;
+            }
             if (GOAT == null || GOAT.travelledDistance > ants[0].travelledDistance)
                 GOAT = ants[0];
             for (int antId = 1; antId < ile_mrowek; antId++)
@@ -184,7 +191,7 @@ namespace TSP_Mrowkowy
                 
                 
                 //Console.WriteLine("[" + string.Join(", ", lista) + "]");
-                Console.WriteLine($"OPTIMAL dist: {droga}");
+                Console.WriteLine($"OPTIMAL_DIST: {droga}");
                 return lista;
             }
             else

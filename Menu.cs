@@ -30,6 +30,9 @@ namespace TSP_Mrowkowy
                 case 'Q':
                 case 'q':
                     return;
+                case 'x':
+                case 'X':
+                    goto MenuX;
 
                 default:
                     goto MainMenu;
@@ -118,6 +121,14 @@ namespace TSP_Mrowkowy
             //wypiszFero();
             Program.show_goat();
 
+            goto MainMenu;
+        MenuX:
+            for (int i = 0; i < Program.ile_miast; i++)
+                for (int j = 0; j < Program.ile_miast; j++)
+                    if (i != j)
+                        Program.edges[i, j].pheromone = Program.default_fero;
+            Console.WriteLine("changes saved - default fero; restarted");
+            Program.restart = true;
             goto MainMenu;
         }
     }
