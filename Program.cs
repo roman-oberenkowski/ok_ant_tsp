@@ -55,7 +55,7 @@ namespace TSP_Mrowkowy
             return kordy;
         }
 
-        public static double TripRom()
+        public static double Trip()
         {
             //towrzymy zadaną ilość mrówek i przypisujemy im miasto startowe (losowo)
             Ant[] ants = new Ant[ile_mrowek];

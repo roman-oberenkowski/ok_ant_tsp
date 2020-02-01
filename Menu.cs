@@ -92,12 +92,13 @@ namespace TSP_Mrowkowy
             if (Int32.TryParse(Console.ReadLine(), out int N))
                 for (int i = 1; i <= N; i++)
                 {
+                    if (i % 100 == 50) Program.reset_fero();
                     for (int k = 1; k <= N; k *= 10)
                     {
                         if (i == k) //wypisz wynik 1, 10, 100 .. 10^x iteracji
                         {
                             Console.Write($"{i} ");
-                            Console.WriteLine(Program.TripRom());
+                            Console.WriteLine(Program.Trip());
 
                             break;
                         }
@@ -105,18 +106,18 @@ namespace TSP_Mrowkowy
                         {
 
                             Console.Write($"{i} ");
-                            Console.WriteLine(Program.TripRom());
+                            Console.WriteLine(Program.Trip());
                             break;
                         }
                     }
-                    Program.TripRom(); //iteracja bez wypisania
+                    Program.Trip(); //iteracja bez wypisania
                 }
             else
             {
                 int default_iterations = 5;
                 Console.WriteLine($"wybieram domyślne {default_iterations} iteracji");
                 for (int i = 0; i < default_iterations; i++)
-                    Program.TripRom();
+                    Program.Trip();
             }
             //wypiszFero();
             Program.show_goat();
