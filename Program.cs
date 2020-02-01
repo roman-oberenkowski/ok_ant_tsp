@@ -16,7 +16,7 @@ namespace TSP_Mrowkowy
         public static Edge[,] edges;
         public static Form1 okno;
         public static Ant GOAT;
-        public static string filename = "berlin52";
+        public static string filename = "pr76";
         public static bool restart = false;
         static Cord[] input(ref int ile_miast)
         {
@@ -93,7 +93,7 @@ namespace TSP_Mrowkowy
                         GOAT = ants[antId];
                 }
             }
-            Form1.wyswietlacz.bestWay = ants[IDofMinimal].visitOrder;
+            Form1.wyswietlacz.bestWay = GOAT.visitOrder;
             
 
             //Console.Write($"wyniczek: {minimal}");
@@ -270,6 +270,13 @@ namespace TSP_Mrowkowy
         public static void show_goat()
         {
             Console.WriteLine($"GOAT_DIST: {GOAT.travelledDistance}");
+        }
+        public static void reset_fero()
+        {
+            for (int i = 0; i < Program.ile_miast; i++)
+                for (int j = 0; j < Program.ile_miast; j++)
+                    if (i != j)
+                        Program.edges[i, j].pheromone = Program.default_fero; 
         }
         static void Main(string[] args)
         {

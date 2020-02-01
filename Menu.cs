@@ -11,7 +11,7 @@ namespace TSP_Mrowkowy
         public static void Start()
         {
         MainMenu:
-            Console.WriteLine("\nO for options, R to run, D to draw, Q to quit");
+            Console.WriteLine("\nO for options, R to run, D to draw, Q to quit, X=restart");
             Console.Write(">>");
             switch (System.Console.ReadKey(true).KeyChar)
             {
