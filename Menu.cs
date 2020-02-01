@@ -116,6 +116,7 @@ namespace TSP_Mrowkowy
                     Program.TripRom();
             }
             //wypiszFero();
+            Program.show_goat();
 
             goto MainMenu;
         }

@@ -26,10 +26,3 @@ C:\Users\Adrian\Desktop\TSP_Mrowkowy\obj\Debug\TSP_Mrowkowy.exe
 C:\Users\Adrian\Desktop\TSP_Mrowkowy\obj\Debug\TSP_Mrowkowy.pdb
 C:\Users\Adrian\Desktop\TSP_Mrowkowy\obj\Debug\TSP_Mrowkowy.Form1.resources
 C:\Users\Adrian\Desktop\TSP_Mrowkowy\obj\Debug\TSP_Mrowkowy.csproj.GenerateResource.cache
-C:\Users\0xE418\Desktop\ok_ant_tsp\bin\Debug\TSP_Mrowkowy.exe.config
-C:\Users\0xE418\Desktop\ok_ant_tsp\bin\Debug\TSP_Mrowkowy.exe
-C:\Users\0xE418\Desktop\ok_ant_tsp\bin\Debug\TSP_Mrowkowy.pdb
-C:\Users\0xE418\Desktop\ok_ant_tsp\obj\Debug\TSP_Mrowkowy.Form1.resources
-C:\Users\0xE418\Desktop\ok_ant_tsp\obj\Debug\TSP_Mrowkowy.csproj.GenerateResource.cache
-C:\Users\0xE418\Desktop\ok_ant_tsp\obj\Debug\TSP_Mrowkowy.exe
-C:\Users\0xE418\Desktop\ok_ant_tsp\obj\Debug\TSP_Mrowkowy.pdb

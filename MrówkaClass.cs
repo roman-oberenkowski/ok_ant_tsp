@@ -137,7 +137,7 @@ namespace TSP_Mrowkowy
             {
                 error = true;
             }
-            if (error) Console.WriteLine("D***-zły wynik");
+            if (error) Console.WriteLine("probably error - check logs");
             //else { Console.WriteLine(" OK"); }
         }
     }

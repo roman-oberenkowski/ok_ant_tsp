@@ -167,17 +167,32 @@ namespace TSP_Mrowkowy
             }
             ;
             nr = Int32.Parse(lines[ile_miast + start]);
+
+
+
             if (nr == -1) //not 0, becouse i don't subrtract while reading last
             {
                 lista.Add(lista.First());
-                Console.WriteLine("[" + string.Join(", ", lista) + "]");
+                //calculate optimal length:
+                
+                double droga = 0;
+                for (int i = 0; i < lista.Count() - 1; i++)
+                {
+                    droga += edges[lista[i], lista[i + 1]].length;
+                    
+                }
+                
+                
+                //Console.WriteLine("[" + string.Join(", ", lista) + "]");
+                Console.WriteLine($"OPTIMAL dist: {droga}");
                 return lista;
             }
             else
             {
                 throw new System.ArgumentException("OptFileLoadFailed");
             }
-            //Console.WriteLine($"opt loaded");
+            
+
 
         }
         static void test_rng()
@@ -216,7 +231,7 @@ namespace TSP_Mrowkowy
             int current = 0;
             greedy_visited[0] = true;
             greedy_visit_order.Add(0);
-            for (int i = 0; i < ile_miast-1; i++)
+            for (int i = 0; i < ile_miast - 1; i++)
             {
                 //find closest
                 int closest_id = -1;
@@ -242,10 +257,13 @@ namespace TSP_Mrowkowy
             //go back to home city
             greedy_travelled_distance += edges[current, greedy_visit_order.First()].length;
             greedy_visit_order.Add(greedy_visit_order.First());
-            Console.WriteLine(string.Join(" ", greedy_visit_order));
-            Console.WriteLine(greedy_travelled_distance);
+            //Console.WriteLine(string.Join(" ", greedy_visit_order));
+            Console.WriteLine($"GREEDY_DIST: {greedy_travelled_distance}");
         }
-    
+        public static void show_goat()
+        {
+            Console.WriteLine($"GOAT_DIST: {GOAT.travelledDistance}");
+        }
         static void Main(string[] args)
         {
             TSP_Mrowkowy.Program.cords= input(ref ile_miast);
