@@ -141,7 +141,7 @@ namespace TSP_Mrowkowy
         }
         static List<int> load_opt()
         {
-            string[] lines = System.IO.File.ReadAllLines("berlin52.opt.tour");
+            string[] lines = System.IO.File.ReadAllLines(filename+".opt.tour");
             List<int> lista = new List<int>();
             lista.Clear();
             int nr = 0;
@@ -177,6 +177,7 @@ namespace TSP_Mrowkowy
             {
                 throw new System.ArgumentException("OptFileLoadFailed");
             }
+            //Console.WriteLine($"opt loaded");
 
         }
         static void test_rng()
@@ -259,7 +260,7 @@ namespace TSP_Mrowkowy
                     if (i != j)
                         edges[i, j] = new Edge(cords[i], cords[j]);
             okno = new Form1();
-            load_opt();
+            if (filename == "berlin52" || filename== "kroC100" || filename== "pr76") load_opt();
             run_greedy();
             //else
             //    edges[i, j] = new Edge(Cord.Zero(), Cord.Zero());
