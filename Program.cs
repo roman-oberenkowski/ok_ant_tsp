@@ -254,7 +254,7 @@ namespace TSP_Mrowkowy
                 greedy_visited[current] = true;
                 greedy_visit_order.Add(current);
             }
-            //go back to home city
+            //go back to home cityy
             greedy_travelled_distance += edges[current, greedy_visit_order.First()].length;
             greedy_visit_order.Add(greedy_visit_order.First());
             //Console.WriteLine(string.Join(" ", greedy_visit_order));
