@@ -11,12 +11,13 @@ namespace TSP_Mrowkowy
         public static int ile_mrowek = 10;
         public static double ilośćFero = 10;
         public static double default_fero = 10;
+        public static int reset_every = 200;
         public static int ile_miast;
         public static Cord[] cords;
         public static Edge[,] edges;
         public static Form1 okno;
         public static Ant GOAT;
-        public static string filename = "pr76";
+        public static string filename = "berlin52";
         public static bool restart = false;
         static Cord[] input(ref int ile_miast)
         {
@@ -273,6 +274,7 @@ namespace TSP_Mrowkowy
         }
         public static void reset_fero()
         {
+            //Console.WriteLine("reset_fero");
             for (int i = 0; i < Program.ile_miast; i++)
                 for (int j = 0; j < Program.ile_miast; j++)
                     if (i != j)

@@ -92,7 +92,7 @@ namespace TSP_Mrowkowy
             if (Int32.TryParse(Console.ReadLine(), out int N))
                 for (int i = 1; i <= N; i++)
                 {
-                    if (i % 100 == 50) Program.reset_fero();
+                    if (i % Program.reset_every == Program.reset_every/2) Program.reset_fero();
                     for (int k = 1; k <= N; k *= 10)
                     {
                         if (i == k) //wypisz wynik 1, 10, 100 .. 10^x iteracji
