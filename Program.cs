@@ -15,18 +15,39 @@ namespace TSP_Mrowkowy
         public static Edge[,] edges;
         public static Form1 okno;
         public static Ant GOAT;
+        public static string filename = "berlin52";
         static Cord[] input(ref int ile_miast)
         {
-            string[] lines = System.IO.File.ReadAllLines("input52.txt");
-            ile_miast = Int32.Parse(lines[0]);
+            
+
+            string[] lines = System.IO.File.ReadAllLines(filename+".tsp");
+            //load ile_miast
+            string[] split_dimension = { "", "" };
+            split_dimension = lines[3].Split(' ', '\t');
+            ile_miast = Int32.Parse(split_dimension[1]);
+            //Console.WriteLine($"ile mista: {ile_miast}");
             Cord[] kordy = new Cord[ile_miast];
+            int start = 0;
+            string[] split_cords = {"","","" };
+            for (int i = 0; i < 10; i++)
+            {
+                split_cords = lines[i].Split(' ', '\t');
+                if (Int32.TryParse(split_cords[0], out start))
+                {
+                    start = i;
+                    break;
+                }
+            }
+            //Console.WriteLine($"start: {start}");
             for (int i = 0; i < ile_miast; i++)
             {
-                string[] XY = { "", "" };
-                XY = lines[i + 1].Split(' ', '\t');
+               
+                string[] XY = { "", "","" };
+                XY = lines[i+start].Split(' ', '\t');
                 float x, y;
-                x = float.Parse(XY[0]);
-                y = float.Parse(XY[1]);
+                x = float.Parse(XY[1]);
+                y = float.Parse(XY[2]);
+                //Console.WriteLine($"{i}, {x}, {y}");
                 kordy[i] = new Cord(x, y);
             }
             return kordy;
