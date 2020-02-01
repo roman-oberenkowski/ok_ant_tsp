@@ -298,6 +298,7 @@ namespace TSP_Mrowkowy
             if (filename == "tsp1000") Console.WriteLine("Best from mmachowiak: 24724");
             if (filename == "tsp500") Console.WriteLine("Best from mmachowiak: 84585");
             if (filename == "tsp250") Console.WriteLine("Best from mmachowiak: 12642");
+            if (filename == "bier127") Console.WriteLine("Best from mmachowiak: 118293");
             run_greedy();
             //else
             //    edges[i, j] = new Edge(Cord.Zero(), Cord.Zero());
