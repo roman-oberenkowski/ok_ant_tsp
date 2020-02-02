@@ -8,22 +8,17 @@ namespace TSP_Mrowkowy
 {
     public class Program
     {
-        public static int ile_mrowek = 10;
-        public static double ilośćFero = 50;
+        public static int ile_mrowek = 50;
+        public static double ilośćFero = 10;
         public static double default_fero = 10;
-        public static int reset_every = 100;
+        public static int reset_every = 200;
         public static int ile_miast;
         public static Cord[] cords;
         public static Edge[,] edges;
         public static Form1 okno;
         public static Ant GOAT;
-        public static string filename = "berlin52";
+        public static string filename = "kroC100";
         public static bool restart = false;
-        //kroc100, ddd
-        public static double[] params_a = { 1.5, 2, 1, 2, 1.5 };
-        public static double[] params_b = { 7, 7, 6, 3, 4 };
-        public static double[] params_ro = { 0.14, 0.1, 0.15, 0.25, 0.13 };
-
         static Cord[] input(ref int ile_miast)
         {
             
@@ -79,6 +74,28 @@ namespace TSP_Mrowkowy
                     ants[antId].goNextAuto();
                 }
             }
+
+            foreach (Ant ant in ants)
+            {
+                double ile_sferomonić;
+
+                if (Program.GOAT != null)
+                {
+                    double lepsza = Program.GOAT.travelledDistance;
+                    ile_sferomonić = Math.Pow(lepsza / ant.travelledDistance, 10);
+                }
+                else
+                    ile_sferomonić = 100;
+
+                edges[ant.visitOrder[Program.ile_miast - 1], ant.visitOrder[0]].pheromoneToGain += ile_sferomonić;
+                edges[ant.visitOrder[0], ant.visitOrder[Program.ile_miast - 1]].pheromoneToGain += ile_sferomonić;
+                for (int i = 0; i < Program.ile_miast; i++)
+                {
+                    edges[ant.visitOrder[i], ant.visitOrder[i + 1]].pheromoneToGain += ile_sferomonić;
+                    edges[ant.visitOrder[i + 1], ant.visitOrder[i]].pheromoneToGain += ile_sferomonić;
+                }
+            }
+
             //znajdź najlepszą mrówkę (porównując travelled distance)
             double minimal = ants[0].travelledDistance;
             int IDofMinimal = 0;
@@ -105,12 +122,12 @@ namespace TSP_Mrowkowy
             //Console.Write($"wyniczek: {minimal}");
             ants[IDofMinimal].checkIfCorrect();
 
-            for (int antId = 0; antId < ile_mrowek; antId++)
-            {
-                //Console.WriteLine($"ant:{antId} dist: {ants[antId].travelledDistance}");
-                ////ants[antId].visitOrder.ForEach(Console.WriteLine);
-                //Console.WriteLine("[{0}]", string.Join(", ", ants[antId].visitOrder));
-            }
+            //for (int antId = 0; antId < ile_mrowek; antId++)
+            //{
+            //    //Console.WriteLine($"ant:{antId} dist: {ants[antId].travelledDistance}");
+            //    ////ants[antId].visitOrder.ForEach(Console.WriteLine);
+            //    //Console.WriteLine("[{0}]", string.Join(", ", ants[antId].visitOrder));
+            //}
 
             //FINIGING Touches ------ŹLE??? nie w tym miejscu
             for (int i = 0; i < ile_miast; i++)
@@ -289,7 +306,7 @@ namespace TSP_Mrowkowy
         {
             TSP_Mrowkowy.Program.cords= input(ref ile_miast);
             edges = new Edge[ile_miast, ile_miast];
-            TSP_Mrowkowy.Edge.ro = 0.1;
+            TSP_Mrowkowy.Edge.ro = 0.5;
             TSP_Mrowkowy.Ant.rnd = new Random();
             TSP_Mrowkowy.Ant.edges = edges;
             TSP_Mrowkowy.Ant.cords = cords;
@@ -300,10 +317,6 @@ namespace TSP_Mrowkowy
                         edges[i, j] = new Edge(cords[i], cords[j]);
             okno = new Form1();
             if (filename == "berlin52" || filename== "kroC100" || filename== "pr76") load_opt();
-            if (filename == "tsp1000") Console.WriteLine("Best from mmachowiak: 24724");
-            if (filename == "tsp500") Console.WriteLine("Best from mmachowiak: 84585");
-            if (filename == "tsp250") Console.WriteLine("Best from mmachowiak: 12642");
-            if (filename == "bier127") Console.WriteLine("Best from mmachowiak: 118293");
             run_greedy();
             //else
             //    edges[i, j] = new Edge(Cord.Zero(), Cord.Zero());
