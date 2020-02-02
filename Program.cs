@@ -11,14 +11,15 @@ namespace TSP_Mrowkowy
         public static int ile_mrowek = 10;
         public static double ilośćFero = 10;
         public static double default_fero = 10;
-        public static int reset_every = 50;
+        public static int reset_every = 100;
         public static int ile_miast;
         public static Cord[] cords;
         public static Edge[,] edges;
         public static Form1 okno;
         public static Ant GOAT;
-        public static string filename = "berlin52";
+        public static string filename = "tsp500";
         public static bool restart = false;
+        public static double test;
         static Cord[] input(ref int ile_miast)
         {
             

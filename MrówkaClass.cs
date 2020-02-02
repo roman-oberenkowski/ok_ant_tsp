@@ -9,8 +9,8 @@ namespace TSP_Mrowkowy
     public class Ant
     {
         //constanst
-        static double factor_phero = 1; //anfa
-        static double factor_visib = 3.0; //beta
+        static double factor_phero = 1.2; //anfa
+        static double factor_visib = 5.0; //beta
         
         //pola
         public static Random rnd;
