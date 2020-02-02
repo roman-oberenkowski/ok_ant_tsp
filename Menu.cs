@@ -90,36 +90,18 @@ namespace TSP_Mrowkowy
             Console.WriteLine("Run\n\tenter a number of iterations");
             Console.Write("\t>>");
             if (Int32.TryParse(Console.ReadLine(), out int N))
-                for (int i = 1; i <= N; i++)
+                for (int param = 0; param < 5; param++)
                 {
-                    if (i % Program.reset_every == Program.reset_every/2) Program.reset_fero();
-                    for (int k = 1; k <= N; k *= 10)
+                    TSP_Mrowkowy.Edge.ro = Program.params_ro[param];
+                    TSP_Mrowkowy.Ant.factor_phero = Program.params_a[param];
+                    TSP_Mrowkowy.Ant.factor_visib = Program.params_b[param];
+                    for (int i = 1; i <= N; i++)
                     {
-                        if (i == k) //wypisz wynik 1, 10, 100 .. 10^x iteracji
-                        {
-                            Console.Write($"{i} ");
-                            Console.WriteLine(Program.Trip());
 
-                            break;
-                        }
-                        if (i % k == 0 && k*10 >= N) //wypisz wynik co każdą zmianę najbardziej znaczącej cyfry
-                        {
-
-                            Console.Write($"{i} ");
-                            Console.WriteLine(Program.Trip());
-                            break;
-                        }
+                        if (i % Program.reset_every == Program.reset_every / 2) Program.reset_fero();
+                        Console.WriteLine(Program.Trip());
                     }
-                    Program.Trip(); //iteracja bez wypisania
                 }
-            else
-            {
-                int default_iterations = 5;
-                Console.WriteLine($"wybieram domyślne {default_iterations} iteracji");
-                for (int i = 0; i < default_iterations; i++)
-                    Program.Trip();
-            }
-            //wypiszFero();
             Program.show_goat();
 
             goto MainMenu;

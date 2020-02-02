@@ -9,7 +9,7 @@ namespace TSP_Mrowkowy
     public class Program
     {
         public static int ile_mrowek = 10;
-        public static double ilośćFero = 10;
+        public static double ilośćFero = 50;
         public static double default_fero = 10;
         public static int reset_every = 100;
         public static int ile_miast;
@@ -17,9 +17,13 @@ namespace TSP_Mrowkowy
         public static Edge[,] edges;
         public static Form1 okno;
         public static Ant GOAT;
-        public static string filename = "tsp500";
+        public static string filename = "berlin52";
         public static bool restart = false;
-        public static double test;
+        //kroc100, ddd
+        public static double[] params_a = { 1.5, 2, 1, 2, 1.5 };
+        public static double[] params_b = { 7, 7, 6, 3, 4 };
+        public static double[] params_ro = { 0.14, 0.1, 0.15, 0.25, 0.13 };
+
         static Cord[] input(ref int ile_miast)
         {
             
