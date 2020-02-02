@@ -33,8 +33,8 @@ namespace TSP_Mrowkowy
         {
             foreach (Cord pkt in cords)
             {
-                for (int i = -2; i <= 2; i++)
-                    for (int j = -2; j <= 2; j++)
+                for (int i = 0; i <= 3; i++)
+                    for (int j = 0; j <= 3; j++)
                         mapaPunkty.SetPixel(Convert.ToInt32(pkt.x * scale) + i, Convert.ToInt32(pkt.y * scale) + j, Color.Red);
             }
         }
